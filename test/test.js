@@ -3,6 +3,7 @@ import {dirName} from '@momsfriendlydevco/es6';
 import {expect} from 'chai';
 import express from 'express';
 import expressLogger from 'express-log-url';
+import fsPath from 'node:path';
 import JITMiddleware from '#lib/expressMiddleware';
 
 const __dirname = dirName();
@@ -18,22 +19,32 @@ describe('@MomsFriendlyDevCo/JIT-Build', ()=> {
 		app.use(expressLogger);
 		app.set('log.indent', '      ');
 
-		app.get('/api/components/:file', JITMiddleware({
+		app.get('/components/:file', JITMiddleware({
 			source: req => `${__dirname}/data/${req.params.file}`,
-			dest: req => `/tmp/esbuild.${req.params.file}.js`,
+			dest: req => {
+				let parsed = fsPath.parse(req.params.file);
+				return `${__dirname}/data/${parsed.name}.compiled${parsed.ext}`;
+			},
 		}))
 
-		// FIXME: Routes
 		server = app.listen(port, null, finish);
 	});
 	after(()=> server && server.close());
 	// }}}
 
 	it('should serve a compiled .vue file', ()=>
-		axios.get(`${url}/api/components/widgets.vue`)
+		axios.get(`${url}/components/widgets.vue`)
 			.then(({data}) => {
 				expect(data).to.be.a('string');
-				console.log('GOT', data);
+				expect(data).to.match(/^export default __vue_component__;$/m);
+			})
+	)
+
+	it('should serve a compiled .scss file', ()=>
+		axios.get(`${url}/components/doodahs.scss`)
+			.then(({data}) => {
+				expect(data).to.be.a('string');
+				expect(data).to.match(/^\.doodahs \.thing {$/m);
 			})
 	)
 
