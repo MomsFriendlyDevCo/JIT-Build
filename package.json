@@ -49,6 +49,7 @@
   "dependencies": {
     "debug": "^4.3.4",
     "esbuild": "^0.17.5",
+    "esbuild-sass-plugin": "^2.4.5",
     "esbuild-vue": "^1.2.2",
     "lodash": "^4.17.21"
   },

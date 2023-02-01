@@ -9,5 +9,17 @@ app.component('widgets', {
 </script>
 
 <template>
-	<p>Hello <b>{{foo}}</b></p>
+	<div class="widgets">
+		<p class="greeting">
+			Hello <b>{{foo}}</b>
+		</p>
+	</div>
 </template>
+
+<style lang="scss">
+.widgets {
+	& .greeting {
+		font-decoration: underline;
+	}
+}
+</style>
