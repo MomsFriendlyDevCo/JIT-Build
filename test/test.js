@@ -19,7 +19,8 @@ describe('@MomsFriendlyDevCo/JIT-Build', ()=> {
 		app.set('log.indent', '      ');
 
 		app.get('/api/components/:file', jitMiddleware({
-			source: req => `${__dirname}/${req.param.file}`,
+			source: req => `${__dirname}/data/${req.params.file}`,
+			dest: req => `/tmp/esbuild.${req.params.file}.js`,
 		}))
 
 		// FIXME: Routes

@@ -48,7 +48,8 @@
   },
   "dependencies": {
     "debug": "^4.3.4",
-    "esbuild": "^0.17.5"
+    "esbuild": "^0.17.5",
+    "esbuild-vue": "^1.2.2"
   },
   "devDependencies": {
     "@momsfriendlydevco/es6": "^1.2.0",
