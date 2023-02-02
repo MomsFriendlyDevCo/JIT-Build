@@ -1,7 +1,7 @@
 {
   "name": "@momsfriendlydevco/jit-build",
   "version": "1.0.0",
-  "description": "Just-in-time, as required dynamic build endpoints via Express",
+  "description": "Just-in-time, as-required dynamic build endpoints via Express",
   "main": "lib/es6.js",
   "type": "module",
   "scripts": {
