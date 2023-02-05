@@ -28,7 +28,7 @@
     "node": ">=16.14.0"
   },
   "exports": {
-    ".": "./lib/expressMiddleware.js",
+    ".": "./lib/jit.js",
     "./*": "./lib/*.js"
   },
   "imports": {
