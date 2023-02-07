@@ -80,6 +80,7 @@ Options are:
 | `errReport`            | `Function`           |         | Function to output any raised errors to the console. Called as `(err, session)`                                                                                                      |
 | `errResponse`          | `Function`           |         | Function to respond back to the requestee on failed errors. Called as `(err, session)`                                                                                               |
 | `force`                | `Boolean`            | `false` | If truthy `hashMatches` is ignored, triggering a rebuild every time                                                                                                                  |
+| `buildSettings`      | Object             | `{}`  | Additional (Non-esbuild) settings to send to `build()` |
 
 
 **Notes:**
