@@ -1,11 +1,12 @@
 <script lang="js">
-app.component('widgets', {
+export default {
+	id: 'widgets',
 	data() { return {
 		foo: 'Foo!',
 		bar: 'Bar!',
 		baz: 'Baz!',
 	}},
-});
+}
 </script>
 
 <template>
