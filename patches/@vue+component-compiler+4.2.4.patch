@@ -1,0 +1,28 @@
+diff --git a/node_modules/@vue/component-compiler/dist/postcss-clean.js b/node_modules/@vue/component-compiler/dist/postcss-clean.js
+index 6944c74..957a5c5 100644
+--- a/node_modules/@vue/component-compiler/dist/postcss-clean.js
++++ b/node_modules/@vue/component-compiler/dist/postcss-clean.js
+@@ -4,10 +4,16 @@ const postcss = require("postcss");
+ // ESM import of clean-css breaks test/runtime check this fix for reference:
+ // https://github.com/vuejs/vue-component-compiler/pull/103#issuecomment-632676899
+ const CleanCSS = require('clean-css');
+-exports.default = postcss.plugin('clean', (options) => {
+-    const clean = new CleanCSS(Object.assign({ compatibility: 'ie9' }, options));
+-    return (css, res) => {
+-        const output = clean.minify(css.toString());
+-        res.root = postcss.parse(output.styles);
+-    };
+-});
++exports.default = (options) => {
++	const clean = new CleanCSS(Object.assign({ compatibility: 'ie9' }, options));
++	return (css, res) => {
++		return {
++            postcssPlugin: 'clean',
++            Once(css, res) {
++                const output = clean.minify(css.toString());
++                res.root = postcss.parse(output.styles);
++            },
++        };
++    }
++};
++exports.postcss = true
