@@ -10,7 +10,7 @@ const __dirname = dirName();
 const port = 8181;
 const url = `http://localhost:${port}`;
 
-describe('@MomsFriendlyDevCo/JIT-Build', ()=> {
+describe('@MomsFriendlyDevCo/JIT-Build/expressMiddleware', ()=> {
 
 	// Server setup {{{
 	let server;
@@ -20,11 +20,13 @@ describe('@MomsFriendlyDevCo/JIT-Build', ()=> {
 		app.set('log.indent', '      ');
 
 		app.get('/components/:file', JITMiddleware({
-			source: req => `${__dirname}/data/${req.params.file}`,
+			root: __dirname,
+			source: req => `data/${req.params.file}`,
 			dest: req => {
 				let parsed = fsPath.parse(req.params.file);
 				return `${__dirname}/data/${parsed.name}.compiled${parsed.ext}`;
 			},
+			swap: req => `${__dirname}/data/esbuild.${req.params.file}.${Date.now()}-${Math.ceil(Math.random() * 100000)}.swp`,
 		}))
 
 		server = app.listen(port, null, finish);
