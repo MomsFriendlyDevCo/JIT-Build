@@ -33,7 +33,8 @@
     "./*": "./lib/*.js"
   },
   "imports": {
-    "#lib/*": "./lib/*.js"
+    "#lib/*": "./lib/*.js",
+    "#plugins/*": "./plugins/*.js"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
