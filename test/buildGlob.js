@@ -30,6 +30,44 @@ describe('@MomsFriendlyDevCo/JIT-Build/buildGlob', ()=> {
 			})
 	)
 
+	it('should build a .vue file by glob (+minify)', ()=>
+		JITBuildGlob(`${__dirname}/data/*.vue`, {
+			swap: path => `${__dirname}/data/esbuild.${fsPath.basename(path)}.${Date.now()}-${Math.ceil(Math.random() * 100000)}.swp`,
+			minify: true,
+		})
+			.then(()=> fs.readFile(`${__dirname}/data/widgets.compiled.js`, 'utf8'))
+			.then(contents => {
+				expect(contents).to.match(/const v={/);
+			})
+	)
+
+	it('should build a .vue file by glob (+customExporter)', ()=>
+		JITBuildGlob(`${__dirname}/data/*.vue`, {
+			swap: path => `${__dirname}/data/esbuild.${fsPath.basename(path)}.${Date.now()}-${Math.ceil(Math.random() * 100000)}.swp`,
+			buildSettings: {
+				rewriteExport: 'customExporter($<exported>);',
+			},
+		})
+			.then(()=> fs.readFile(`${__dirname}/data/widgets.compiled.js`, 'utf8'))
+			.then(contents => {
+				expect(contents).to.match(/customExporter(.+)/);
+			})
+	)
+
+	it('should build a .vue file by glob (+minify +customExporter)', ()=>
+		JITBuildGlob(`${__dirname}/data/*.vue`, {
+			swap: path => `${__dirname}/data/esbuild.${fsPath.basename(path)}.${Date.now()}-${Math.ceil(Math.random() * 100000)}.swp`,
+			minify: true,
+			buildSettings: {
+				rewriteExport: 'customExporter($<exported>);',
+			},
+		})
+			.then(()=> fs.readFile(`${__dirname}/data/widgets.compiled.js`, 'utf8'))
+			.then(contents => {
+				expect(contents).to.match(/customExporter(.+)/);
+			})
+	)
+
 	it('should build everything with a fancy UI', ()=>
 		JITBuildGlob(`${__dirname}/data/*`, {
 			swap: path => `${__dirname}/data/esbuild.${fsPath.basename(path)}.${Date.now()}-${Math.ceil(Math.random() * 100000)}.swp`,
