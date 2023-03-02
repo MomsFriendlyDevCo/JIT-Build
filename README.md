@@ -76,11 +76,11 @@ Options are:
 | `immutable`            | `Boolean`            | `false` | Whether the source files should be compiled once and only once if missing.                                                                                                           |
 | `hashMatches`          | `Function`           |         | Function called as `(session)` to return if the two files are identical. A true response will skip rebuild and serve the last generated file                                         |
 | `hashDrift`            | `Number`             | `250`   | Maximum allowed clock drift in milliseconds for the default `options.hashMatches` functionality                                                                                      |
-| `minify=false`         | `Boolean`            | `false` | Whether to minify the output                                                                                                                                                         |
+| `minify`               | `Boolean`            | `false` | Whether to minify the output                                                                                                                                                         |
 | `errReport`            | `Function`           |         | Function to output any raised errors to the console. Called as `(err, session)`                                                                                                      |
 | `errResponse`          | `Function`           |         | Function to respond back to the requestee on failed errors. Called as `(err, session)`                                                                                               |
 | `force`                | `Boolean`            | `false` | If truthy `hashMatches` is ignored, triggering a rebuild every time                                                                                                                  |
-| `buildSettings`      | Object             | `{}`  | Additional (Non-esbuild) settings to send to `build()` |
+| `buildSettings`        | Object               | `{}`    | Additional (Non-esbuild) settings to send to `build()`                                                                                                                               |
 
 
 **Notes:**
