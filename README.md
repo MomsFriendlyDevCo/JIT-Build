@@ -5,6 +5,7 @@ An Express middleware layer to compile-as-needed single components from various 
 * Simple express endpoint to make local development quicker
 * Compiles files individually rather than an entire site (the downside being inefficiencies and shared code)
 * Out-of-the-box support for `.vue`, `.scss` and `<style lang="scss">`
+* Out-of-the-box absolute root path support
 
 
 ```javascript
