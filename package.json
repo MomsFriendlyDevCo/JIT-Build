@@ -58,6 +58,7 @@
     "globby": "^13.1.4",
     "lodash": "^4.17.21",
     "patch-package": "^6.5.1",
+    "postcss": "^8.4.23",
     "postcss-modules": "^6.0.0",
     "spinnies": "^0.5.1"
   },
